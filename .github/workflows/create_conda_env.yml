@@ -24,7 +24,6 @@ jobs:
       run: |
         conda create -n geo_env python=3.14 -y
         conda install -n geo_env -c conda-forge basemap -y
-        conda install -n geo_env -c conda-forge --no-deps numpy=2.5
 
     - name: Print package versions
       shell: bash -el {0}
