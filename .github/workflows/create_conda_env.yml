@@ -1,0 +1,33 @@
+name: Conda Environment with Basemap and NumPy
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Setup Miniconda
+      uses: conda-incubator/setup-miniconda@v3
+      with:
+        auto-update-conda: true
+        python-version: '3.14'
+        miniconda-version: 'latest'
+
+    - name: Create conda environment
+      shell: bash -el {0}
+      run: |
+        conda create -n geo_env python=3.14 -y
+        conda install -n geo_env -c conda-forge numpy=2.5 basemap -y
+
+    - name: Print package versions
+      shell: bash -el {0}
+      run: |
+        conda activate geo_env
+        python --version
+        conda list
